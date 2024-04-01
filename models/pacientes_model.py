@@ -1,0 +1,15 @@
+from sqlalchemy import Column, Integer, String, TIMESTAMP
+from Class.database import Database as DB
+
+class Pacientes_model(DB.base_class):
+    __tablename__ = "pacientes"
+
+    id = Column(Integer, primary_key=True)
+    Nombre = Column(String(45), nullable=False)
+    Apellido = Column(String(45), nullable=False)
+    genero_id = Column(Integer, nullable=False)
+    tipo_identificacion_id = Column(Integer, nullable=False)
+    Numero_identificacion = Column(String(45), nullable=False)
+    Edad = Column(Integer, nullable=False)
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
