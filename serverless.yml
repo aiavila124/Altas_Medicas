@@ -1,0 +1,115 @@
+service: AltasMedicas
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  environment:
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_HOST: ${env:DB_HOST}
+    DB_NAME: ${env:DB_NAME}
+
+useDotenv: true
+
+functions:
+  login:
+    handler: handler.login
+    events:
+      - httpApi:
+          path: /
+          method: post
+          
+  insert_login:
+    handler: handler.insert_login
+    events:
+      - httpApi:
+          path: /insert_login
+          method: post
+
+  insert_tipo_identificacion:
+    handler: handler.insert_tipo_identificacion
+    events:
+      - httpApi:
+          path: /insert_tipo_identificacion
+          method: post
+
+  get_tipo_identificacion:
+    handler: handler.get_tipo_identificacion
+    events:
+      - httpApi:
+          path: /get_tipo_identificacion
+          method: get
+  
+  insert_genero:
+    handler: handler.insert_genero
+    events:
+      - httpApi:
+          path: /insert_genero
+          method: post
+    
+  insert_medico:
+    handler: handler.insert_medico
+    events:
+      - httpApi:
+          path: /insert_medico
+          method: post
+  
+  insert_paciente:
+    handler: handler.insert_paciente
+    events:
+      - httpApi:
+          path: /insert_paciente
+          method: post
+
+  insert_eps:
+    handler: handler.insert_eps
+    events:
+      - httpApi:
+          path: /insert_eps
+          method: post
+
+  insert_ingreso_pacientes:
+    handler: handler.insert_ingreso_pacientes
+    events:
+      - httpApi:
+          path: /insert_ingreso_pacientes
+          method: post
+
+  delete_ingreso_pacientes:
+    handler: handler.delete_ingreso_pacientes
+    events:
+      - httpApi:
+          path: /delete_ingreso_pacientes/{id}
+          method: delete
+
+  insert_procedimientos:
+    handler: handler.insert_procedimientos
+    events:
+      - httpApi:
+          path: /insert_procedimientos
+          method: post
+
+  insert_gravedad:
+    handler: handler.insert_gravedad
+    events:
+      - httpApi:
+          path: /insert_gravedad
+          method: post
+
+  update_gravedad:
+    handler: handler.update_gravedad
+    events:
+      - httpApi:
+          path: /update_gravedad/{id}
+          method: put
+
+  insert_altas_medicas:
+    handler: handler.insert_altas_medicas
+    events:
+      - httpApi:
+          path: /insert_altas_medicas
+          method: post
+
+plugins:
+  - serverless-offline
